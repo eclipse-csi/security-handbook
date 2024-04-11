@@ -1,0 +1,8 @@
+# IDE
+.idea
+
+# python virtual environment
+venv
+
+# sphinx build directory
+_build
