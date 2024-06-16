@@ -1,0 +1,3 @@
+sphinx-design
+myst-parser
+pydata-sphinx-theme
