@@ -6,6 +6,10 @@ This repository contains the source for the Eclipse Foundation Security Handbook
 
 * Compiled in [secure-developer.md](secure-developer.md)
 
+## Best Practices in Vulnerability Management
+
+* [Best Practices Related to Embargoes](embargoes.md)
+
 ## Other best practices
 
 * [digital-defense.io](https://digital-defense.io): personal security checklist.
