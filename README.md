@@ -4,11 +4,11 @@ This repository contains the source for the Eclipse Foundation Security Handbook
 
 ## Best Practices for Securing Developers Environment
 
-* Compiled in [secure-developer.md](secure-developer.md)
+* Compiled in [secure-developer.md](docs/developer/index.md)
 
 ## Best Practices in Vulnerability Management
 
-* [Best Practices Related to Embargoes](embargoes.md)
+* [Best Practices Related to Embargoes](docs/vulnerabilities/embargoes.md)
 
 ## Other best practices
 
