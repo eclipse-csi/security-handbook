@@ -11,6 +11,7 @@ This repository contains the source for the Eclipse Foundation Security Handbook
 ## Best Practices in Vulnerability Management
 
 * [Best Practices Related to Embargoes](docs/vulnerabilities/embargoes.md)
+* [Security Advisories](docs/vulnerabilities/advisories.md)
 
 ## Other best practices
 
