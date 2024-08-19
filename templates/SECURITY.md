@@ -14,8 +14,9 @@ This project adheres to the [Eclipse Foundation Vulnerability Reporting Policy](
 
 If you think you have found a vulnerability in `<project>` you can report it using one of the following ways:
 
-* Contact the [Eclipse Foundation Security Team](mailto:security@eclipse-foundation.org)
-* Create a [confidential issue](https://gitlab.eclipse.org/security/vulnerability-reports/-/issues/new?issuable_template=new_vulnerability)
+* Contact the [Eclipse Foundation Security Team](mailto:security@eclipse-foundation.org) via email
+* Create a [confidential issue](https://gitlab.eclipse.org/security/vulnerability-reports/-/issues/new?issuable_template=new_vulnerability) in the EF Vulnerability Reporting Tracker
+* [Optional] Report a [vulnerability](https://github.com/<organization>/<repository>/security/advisories/new) directly via private vulnerability reporting on GitHub
 
 You can find more information about reporting and disclosure at the [Eclipse Foundation Security page](https://www.eclipse.org/security/).
 
