@@ -14,7 +14,7 @@ This project adheres to the [Eclipse Foundation Vulnerability Reporting Policy](
 
 If you think you have found a vulnerability in this repository, please report it to us through coordinated disclosure.
 
-**Please do not report security vulnerabilities through public GitHub issues, discussions, or pull requests.**
+**Please do not report security vulnerabilities through public issues, discussions, or change requests.**
 
 Instead, you can report it using one of the following ways:
 
