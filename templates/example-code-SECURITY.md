@@ -10,6 +10,14 @@
 
 This repository adheres to the [Eclipse Foundation Vulnerability Reporting Policy](https://www.eclipse.org/security/policy/).
 
+## Vulnerability Handling
+
+This repository contains code for educational and / or  demonstration purposes only and **SHOULD NOT** be used for production.
+
+In accordance with the latest [CNA rules](https://www.cve.org/ResourcesSupport/AllResources/CNARules), no CVE IDs will be assigned for vulnerabilities reported to this repository, 
+however the project will strive to fix any reported vulnerability and mention vulnerable released or tagged versions of code in this repository in the 
+[README.md](https://github.com/<organization/<repository>/blob/main/README.md).
+
 ## How To Report a Vulnerability
 
 If you think you have found a vulnerability in this repository you can report it using one of the following ways:
@@ -19,11 +27,3 @@ If you think you have found a vulnerability in this repository you can report it
 * **[If hosting on GitHub]** Report a [vulnerability](https://github.com/<organization>/<repository>/security/advisories/new) directly via private vulnerability reporting on GitHub
 
 You can find more information about reporting and disclosure at the [Eclipse Foundation Security page](https://www.eclipse.org/security/).
-
-## Vulnerability Handling
-
-This repository contains code for educational and / or  demonstration purposes only and **SHOULD NOT** be used for production.
-
-In accordance with the latest [CNA rules](https://www.cve.org/ResourcesSupport/AllResources/CNARules), no CVE IDs will be assigned for vulnerabilities reported to this repository, 
-however the project will strive to fix any reported vulnerability and mention vulnerable released or tagged versions of code in this repository in the 
-[README.md](https://github.com/<organization/<repository>/blob/main/README.md).
