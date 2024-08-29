@@ -8,7 +8,7 @@
     Eclipse Foundation Security Team at security@eclipse-foundation.org
 -->
 
-This repository adheres to the [Eclipse Foundation Vulnerability Reporting Policy](https://www.eclipse.org/security/policy/).
+This Eclipse Foundation Project adheres to the [Eclipse Foundation Vulnerability Reporting Policy](https://www.eclipse.org/security/policy/).
 
 ## Vulnerability Handling
 
