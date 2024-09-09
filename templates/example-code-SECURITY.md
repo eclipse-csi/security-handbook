@@ -12,11 +12,9 @@ This Eclipse Foundation Project adheres to the [Eclipse Foundation Vulnerability
 
 ## Vulnerability Handling
 
-This repository contains code for educational and / or  demonstration purposes only and **SHOULD NOT** be used for production.
+This repository contains code for educational and / or demonstration purposes only and **SHOULD NOT** be used for production.
 
-In accordance with the latest [CNA rules](https://www.cve.org/ResourcesSupport/AllResources/CNARules), no CVE IDs will be assigned for vulnerabilities reported to this repository, 
-however the project will strive to fix any reported vulnerability and mention vulnerable released or tagged versions of code in this repository in the 
-[README.md](https://github.com/<organization/<repository>/blob/main/README.md).
+In general, no CVE IDs will be assigned for vulnerabilities reported to this repository, however the project will strive to fix any reported vulnerability and mention vulnerable released or tagged versions of code in this repository in it's [README.md](https://github.com/<organization/<repository>/blob/main/README.md).
 
 ## How To Report a Vulnerability
 
