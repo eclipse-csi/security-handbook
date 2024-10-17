@@ -36,6 +36,7 @@ myst:
 * [trivy](https://github.com/aquasecurity/trivy): Trivy is a comprehensive and versatile security scanner. Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds and more
 * [clair](https://github.com/quay/clair): Vulnerability Static Analysis for Containers
 * [kube-bench](https://github.com/aquasecurity/kube-bench): tool that checks whether Kubernetes is deployed securely by running the checks documented in the CIS Kubernetes Benchmark
+* [purl-spec](https://github.com/package-url/purl-spec): A purl or package URL is an attempt to standardize existing approaches to reliably identify and locate software packages. It also contains a specification of [vers](https://github.com/package-url/purl-spec/blob/master/VERSION-RANGE-SPEC.rst), a mostly universal version range specifier.
 
 ## Index
 
