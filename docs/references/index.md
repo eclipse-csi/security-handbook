@@ -17,6 +17,7 @@ myst:
 * [FLOSS Best Practices Criteria](https://www.bestpractices.dev/en/criteria)
 * [Source Code Management Platform Configuration Best Practices](https://best.openssf.org/SCM-BestPractices/)
 * [Secure Supply Chain Consumption Framework (S2C2F) Simplified Requirements](https://github.com/ossf/s2c2f/blob/main/specification/framework.md)
+* 2024-09-03: [Framing Software Component Transparency: Establishing a Common Software Bill of Materials (SBOM) - CISA](https://www.cisa.gov/sites/default/files/2024-10/SBOM%20Framing%20Software%20Component%20Transparency%202024.pdf)
 
 ## Tools
 
