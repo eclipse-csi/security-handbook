@@ -17,6 +17,9 @@ myst:
 * [FLOSS Best Practices Criteria](https://www.bestpractices.dev/en/criteria)
 * [Source Code Management Platform Configuration Best Practices](https://best.openssf.org/SCM-BestPractices/)
 * [Secure Supply Chain Consumption Framework (S2C2F) Simplified Requirements](https://github.com/ossf/s2c2f/blob/main/specification/framework.md)
+* 2023-10-25: [Shifting the Balance of Cybersecurity Risk: Principles and Approaches for Secure by Design Software - CISA
+](https://www.cisa.gov/sites/default/files/2023-10/SecureByDesign_1025_508c.pdf)
+* 2024-09-03: [Framing Software Component Transparency: Establishing a Common Software Bill of Materials (SBOM) - CISA](https://www.cisa.gov/sites/default/files/2024-10/SBOM%20Framing%20Software%20Component%20Transparency%202024.pdf)
 
 ## Tools
 
@@ -33,6 +36,7 @@ myst:
 * [trivy](https://github.com/aquasecurity/trivy): Trivy is a comprehensive and versatile security scanner. Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds and more
 * [clair](https://github.com/quay/clair): Vulnerability Static Analysis for Containers
 * [kube-bench](https://github.com/aquasecurity/kube-bench): tool that checks whether Kubernetes is deployed securely by running the checks documented in the CIS Kubernetes Benchmark
+* [purl-spec](https://github.com/package-url/purl-spec): A purl or package URL is an attempt to standardize existing approaches to reliably identify and locate software packages. It also contains a specification of [vers](https://github.com/package-url/purl-spec/blob/master/VERSION-RANGE-SPEC.rst), a mostly universal version range specifier.
 
 ## Index
 
