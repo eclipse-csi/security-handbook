@@ -1,8 +1,13 @@
 # Security Policy
 
 <!--
-    Adapt this template as needed for your projects. Make sure to replace 
-    `<project>` with your project name.
+    THIS IS A TEMPLATE THAT YOU MUST MODIFIY FOR USE BY YOUR PROJECT.
+    
+    Adapt this template as required:
+
+    * Remove content that does not make sense for your project
+    * Replace <organization> and <repository> with values for your project
+    * Remove the comments
 
     For any questions about implementing security best practices, contact the 
     Eclipse Foundation Security Team at security@eclipse-foundation.org
@@ -16,11 +21,11 @@ If you think you have found a vulnerability in this repository, please report it
 
 **Please do not report security vulnerabilities through public issues, discussions, or change requests.**
 
-Instead, you can report it using one of the following ways:
+Instead, report it using one of the following ways:
 
 * Contact the [Eclipse Foundation Security Team](mailto:security@eclipse-foundation.org) via email
 * Create a [confidential issue](https://gitlab.eclipse.org/security/vulnerability-reports/-/issues/new?issuable_template=new_vulnerability) in the Eclipse Foundation Vulnerability Reporting Tracker
-* [Optional] Report a [vulnerability](https://github.com/<organization>/<repository>/security/advisories/new) directly via private vulnerability reporting on GitHub
+* <!-- EDIT THIS LINE IF YOUR PROJECT USES GITHUB ADVISORIES; DELETE IT OTHERWISE --> Report a [vulnerability](https://github.com/<organization>/<repository>/security/advisories/new) directly via private vulnerability reporting on GitHub
 
 You can find more information about reporting and disclosure at the [Eclipse Foundation Security page](https://www.eclipse.org/security/).
 
@@ -32,8 +37,8 @@ Please include as much of the information listed below as you can to help us bet
 * Step-by-step instructions to reproduce the issue
 * The location of the affected source code (tag/branch/commit or direct URL)
 * Full paths of source file(s) related to the manifestation of the issue
-* Any special configuration required to reproduce the issue
-* Any log files that are related to this issue (if possible)
+* Configuration required to reproduce the issue
+* Log files that are related to this issue (if possible)
 * Proof-of-concept or exploit code (if possible)
 
 This information will help us triage your report more quickly.
