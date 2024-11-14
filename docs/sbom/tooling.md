@@ -11,8 +11,6 @@ This page introduces a selection of tools that can help **generate** SBOMs acros
 | **Multi-Ecosystem** | [cdxgen](#cdxgen)|
 |                     | [Github Action: cdxgen](#github-action-cdxgen)|
 
-
-
 ---
 ## Java
 Java is a compiled language, meaning an SBOM should be generated whenever a release version of the project is built. Since Java build systems are responsible for downloading all the dependencies required to compile and package the project, the optimal choice is to generate an SBOM during the build process. 
@@ -90,7 +88,6 @@ Below is an example of the **default** configuration:
 </plugins>
 ```
 
-
 ### Additional Reading
 * [Snyk Blog: How to create SBOMs in Java with Maven and Gradle](https://snyk.io/blog/create-sboms-java-maven-gradle/)
 * [Learn SBOM: Tool Review: CycloneDX Maven](https://www.youtube.com/watch?v=YK9mHhegQV4)
@@ -153,7 +150,6 @@ cyclonedxBom {
 * PDM's Python virtual environments 
 * conda's Python environments
 
-
 ### Installation
 * Install via pip: `python -m pip install cyclonedx-bom`
 * Install via pipx: `pipx install cyclonedx-bom`
@@ -167,7 +163,7 @@ cyclonedxBom {
 In order to automate SBOM generation and publishing for new releases, depending on the CI tool you're using, the next step is to add a command that generates the SBOM as part of your build process. 
 
 For projects that use GitHub Actions, a workflow can be defined with steps for:
- * Generation
+* Generation
 ```
 - name: Install cyclonedx-py
   run: pipx install cyclonedx-bom
@@ -183,8 +179,6 @@ For projects that use GitHub Actions, a workflow can be defined with steps for:
           path: bom.json
 ```
 A complete workflow example for SBOM generation and upload to DependencyTrack can be found here: [generate-sbom.yml](https://github.com/eclipse-csi/otterdog/blob/main/.github/workflows/generate-.sbom.yml).
-
-
 
 ---
 ### Github Action: CycloneDX for Python
@@ -202,9 +196,7 @@ A complete workflow example for SBOM generation and upload to DependencyTrack ca
     output: ./bom.json
     format: json
 ```
-
 ---
-
 ## Multi-Ecosystem Tools
 ### cdxgen
 * Website: https://cyclonedx.github.io/cdxgen
@@ -231,8 +223,6 @@ A complete workflow example for SBOM generation and upload to DependencyTrack ca
 ### Usage
 * Generate an SBOM for cwd: `cdxgen -t <lang> .`
 * Generate an SBOM for cwd for a Multi-Language project: `cdxgen -t <lang> -t <lang> .`  
-
-
 ---
 
 ### Github Action: cdxgen
@@ -252,7 +242,6 @@ A complete workflow example for SBOM generation and upload to DependencyTrack ca
 * Container files (docker, podman)
 * Swift
 * OpenAPI
-
 
 ### Usage
 To simply print the SBOM to console, add the following step to a workflow:
