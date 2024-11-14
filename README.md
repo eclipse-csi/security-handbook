@@ -13,6 +13,12 @@ This repository contains the source for the Eclipse Foundation Security Handbook
 * [Best Practices Related to Embargoes](docs/vulnerabilities/embargoes.md)
 * [Security Advisories](docs/vulnerabilities/advisories.md)
 
+## Best Practices for SBOM Implementation
+
+* [Introduction to SBOM](docs/sbom/introduction.md)
+* [Tooling Ecosystem for CycloneDX SBOM Generation](docs/sbom/tooling.md)
+
+
 ## Other best practices
 
 * [digital-defense.io](https://digital-defense.io): personal security checklist.
