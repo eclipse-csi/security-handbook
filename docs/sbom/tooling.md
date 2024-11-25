@@ -1,15 +1,20 @@
 # Tooling Ecosystem for CycloneDX
 This page introduces a selection of tools that can help **generate** SBOMs across different programming languages and ecosystems. While not exhaustive, it aims to offer a starting point for creating SBOMs in the CycloneDX format.
 
-
-| **Environment**                    | **Tool**                                           |
-|---------------------|----------------------------------------------------|
-| **Java: Maven**     | [CycloneDX Maven Plugin](#cyclonedx-for-maven)     |
-| **Java: Gradle**    | [CycloneDX Gradle Plugin](#cyclonedx-for-gradle)|
-| **Python**          | [CycloneDX for Python](#cyclonedx-for-python)|
-|                     | [Github Action: CycloneDX for Python](#github-action-cyclonedx-for-python)|
-| **Multi-Ecosystem** | [cdxgen](#cdxgen)|
-|                     | [Github Action: cdxgen](#github-action-cdxgen)|
+| **Environment**     | **Ecosystem/Build System** | **Tool**                                                      |
+|---------------------|----------------------------|---------------------------------------------------------------|
+| **Java**            | Maven                      | [cyclonedx-for-maven](#cyclonedx-for-maven)                   |
+|                     | Gradle                     | [cyclonedx-for-gradle](#cyclonedx-for-gradle)                 |
+| **Python**          | All                        | [cyclonedx-for-python](#cyclonedx-for-python)                 |
+|                     | Github Actions             | [gh-python-generate-sbom](#gh-python-generate-sbom)|
+| **Nodejs**          | All                        | [cyclonedx-bom](#cyclonedx-bom)                               |
+|                     | NPM                        | [cyclonedx-npm](#cyclonedx-npm)                               |
+|                     | Yarn                       | [yarn-plugin-cyclonedx](#yarn-plugin-cyclonedx)               |
+|                     | React                      | [webpack-plugin with React](#webpack-plugin-with-react)       |
+|                     | Github Actions             | [gh-node-module-generatebom](#gh-node-module-generatebom)     |
+| **Go**              | Modules                    | [cyclonedx-gomod](#cyclonedx-gomod)                           |
+| **Multi-Ecosystem** | All                        | [cdxgen](#cdxgen)                                             |
+|                     | Github Actions             | [cdxgen-action](#cdxgen-action)         |
 
 ---
 ## Java
@@ -136,7 +141,6 @@ cyclonedxBom {
 ```
 
 ## Python
-
 ### CycloneDX for Python
 * Website: https://pypi.org/project/cyclonedx-bom/
 * Source: https://github.com/CycloneDX/cyclonedx-python
@@ -181,7 +185,7 @@ For projects that use GitHub Actions, a workflow can be defined with steps for:
 A complete workflow example for SBOM generation and upload to DependencyTrack can be found here: [generate-sbom.yml](https://github.com/eclipse-csi/otterdog/blob/main/.github/workflows/generate-.sbom.yml).
 
 ---
-### Github Action: CycloneDX for Python
+### gh-python-generate-sbom
 * Website: https://github.com/marketplace/actions/cyclonedx-python-generate-sbom
 * Source: https://github.com/CycloneDX/gh-python-generate-sbom
 * Supported data sources: Pip's `requirements.txt` format
@@ -196,7 +200,165 @@ A complete workflow example for SBOM generation and upload to DependencyTrack ca
     output: ./bom.json
     format: json
 ```
----
+
+## Nodejs
+### CycloneDX BOM
+* Website: https://www.npmjs.com/package/@cyclonedx/bom?activeTab=readme
+* Source: https://github.com/CycloneDX/cyclonedx-node-module
+
+As per the official website above, CycloneDX BOM is a "meta-package", a collection of optional dependencies. The dependencies are tools with the common purpose of generating SBOMs for node-based projects. To identify the optimal tooling for your ecosystem, check the table bellow or the [README](https://github.com/CycloneDX/cyclonedx-node-module/blob/master/README.md) of the project for the most up to date information about available tooling.
+
+| Ecosystem/System | Actual Tool                          |
+|-----------|--------------------------------------|
+| npm       | [cyclonedx/cyclonedx-npm](https://www.npmjs.com/package/%40cyclonedx/cyclonedx-npm)            |
+| yarn      | [cyclonedx/yarn-plugin-cyclonedx](https://www.npmjs.com/package/%40cyclonedx/yarn-plugin-cyclonedx)    |
+| Angular          | [cyclonedx/webpack-plugin with Angular](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin?activeTab=readme#user-content-use-with-angular)              |
+| React            | [cyclonedx/webpack-plugin with React](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin?activeTab=readme#user-content-use-with-react)               |
+| Rollup           | [rollup-plugin-sbom](https://www.npmjs.com/package/rollup-plugin-sbom?activeTab=readme)                                  |
+| Vite             | [rollup-plugin-sbom with Vite](https://www.npmjs.com/package/rollup-plugin-sbom?activeTab=readme#usage-with-vite)                        |
+| webpack          | [cyclonedx/webpack-plugin](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin) 
+
+## Nodejs: npm
+### cyclonedx-npm
+* Website: https://www.npmjs.com/package/%40cyclonedx/cyclonedx-npm?activeTab=readme
+* Requirements: node ```>=14```, npm ```in range 6 - 10```
+
+### Supported data sources
+As per [cyclonedx-node-npm/docs/how.md](https://github.com/CycloneDX/cyclonedx-node-npm/blob/main/docs/how.md):
+>This tool utilizes npm-ls on the target project and parses its output.  
+>This way the tool does not depend on libraries that are already part of npm. All logic and analysis is done by npm itself, the output is just interpreted and used.  
+>Sometimes npm-ls got hiccups - caused by individual broken project installation or bugs with npm. Then, this tool may also read `package.json` files inside the node_module directory as an additional information source.
+
+### Installation
+* Install as a global tool via npm: `npm install --global @cyclonedx/cyclonedx-npm`
+* Install as a global tool via npx: `npx --package @cyclonedx/cyclonedx-npm --call exit`
+* Install as a development dependency of the current project: `npm install --save-dev @cyclonedx/cyclonedx-npm`
+
+### Usage
+* If installed via npm: `cyclonedx-npm --help`
+* If installed via npx/project dependency: `npx @cyclonedx/cyclonedx-npm --help`
+
+### Integration
+Integration steps depend on project details and CI tools. In broad terms, when using Github Actions a new workflow can be set up, similar to the Python example above. For Jenkins usage, including a new stage in the pipeline can help with SBOM generation and artifact upload.
+
+## Nodejs: yarn
+### yarn-plugin-cyclonedx
+* Website: https://www.npmjs.com/package/%40cyclonedx/yarn-plugin-cyclonedx
+* Requirements: node ```>=18```, yarn ```>=3 (berry)```
+
+### Installation
+* Zero-install
+* Install as a development dependency of the current project (cli-wrapper):  
+ `yarn add --dev @cyclonedx/yarn-plugin-cyclonedx`
+* Install the [latest version from Github](https://github.com/CycloneDX/cyclonedx-node-yarn/releases/tag/v1.0.2):  
+```yarn plugin import https://github.com/CycloneDX/cyclonedx-node-yarn/releases/latest/download/yarn-plugin-cyclonedx.cjs```
+
+### Usage
+* Zero-install via dlx-wrapper: `yarn dlx -q @cyclonedx/yarn-plugin-cyclonedx --help`
+* Cli-wrapper: `yarn exec cyclonedx-yarn --help`
+* Plugin: `yarn cyclonedx --help`
+
+### Integration
+Depends on installation method, project details and CI tools.
+
+## Nodejs: React
+### webpack-plugin with React
+* Website: https://github.com/CycloneDX/cyclonedx-node-module
+* Requirements:  Node.js ```>=14```, webpack ```^5```;
+* Requirements (older plugin versions): Node.js ```v8.0.0 or higher```, webpack ```v4.0.0 or higher```;
+
+### Installation
+* Install via npm: `npm i -D @cyclonedx/webpack-plugin`
+* Install via yarn: `yarn add -D @cyclonedx/webpack-plugin`
+
+### Usage
+Initialize and confifure the plugin through:  
+```new CycloneDxWebpackPlugin(options?: object)```
+
+### Configuration
+Configuration options can be found in this [table](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin?activeTab=readme#options--configuration).
+
+An example of configuring the CycloneDX plugin in `webpack config` can be found in [the plugin documentation](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin?activeTab=readme#options--configuration):
+
+```
+const { CycloneDxWebpackPlugin } = require('@cyclonedx/webpack-plugin');
+
+/** @type {import('@cyclonedx/webpack-plugin').CycloneDxWebpackPluginOptions} */
+const cycloneDxWebpackPluginOptions = {
+  includeWellknown: true,
+  wellknownLocation: './.well-known'
+}
+
+module.exports = {
+  // ...
+  plugins: [
+    new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
+  ]
+}
+```
+See [extended examples](https://github.com/CycloneDX/cyclonedx-webpack-plugin/tree/master/examples).
+
+## Nodejs
+### gh-node-module-generatebom
+* Website: https://github.com/marketplace/actions/cyclonedx-node-js-generate-sbom
+* Source: https://github.com/CycloneDX/gh-node-module-generatebom
+* Requirements:  @cyclonedx/bom@ ```<4```
+* Supported data sources: 
+>This GitHub action requires a `node_modules` directory so this action will typically need to run after an npm build.
+
+### Usage
+* Simple usage:  
+```
+uses: CycloneDX/gh-node-module-generatebom@v1
+```
+* Usage with defining output and path:  
+```
+- name: Create SBOM step
+  uses: CycloneDX/gh-node-module-generatebom@v1
+  with:
+    path: './node_project/'
+    output: './bom_directory/bom.xml'
+```
+
+### Configuration
+* `path` to a node.js project, default is `./`
+* `output` output filename, default is `bom.xml`
+
+## Go: Modules
+### cyclonedx-gomod
+* Source: https://github.com/CycloneDX/cyclonedx-gomod
+
+### Installation
+* Install via Homebrew: `brew install cyclonedx/cyclonedx/cyclonedx-gomod`
+* Install from source: `go install github.com/CycloneDX/cyclonedx-gomod/cmd/cyclonedx-gomod@latest`
+
+### Usage
+* Simple usage:  
+```
+cyclonedx-gomod <SUBCOMMAND> [FLAGS...] [<ARG>...]
+```
+
+Subcommands:
+* `app`: Generate SBOMs for applications, include only those modules that the target application
+  actually depends on
+* `mod`: Generate SBOMs for modules, include the aggregate of modules required by all 
+  packages in the target module (optionally includes modules required by
+  tests and test packages)
+* `bin`: Generate SBOMs for binaries
+* `version`: Show version information
+
+More info about subcommands and usage can be found in [README:Usage](https://github.com/CycloneDX/cyclonedx-gomod?tab=readme-ov-file#usage).
+SBOM examples for each subcommand can be found in the [examples](https://github.com/CycloneDX/cyclonedx-gomod/tree/main/examples) directory. 
+
+### Integration
+Support with integrating the plugin with various tools:
+* Github Actions: [ gh-gomod-generate-sbom](https://github.com/marketplace/actions/cyclonedx-gomod-generate-sbom) on GitHub marketplace
+* [GoReleaser](https://github.com/CycloneDX/cyclonedx-gomod?tab=readme-ov-file#goreleaser-)
+* [Docker](https://github.com/CycloneDX/cyclonedx-gomod?tab=readme-ov-file#docker-)
+
+### Configuration
+Options can be configured through flags, depending on the subcommand of choice. See [README:Subcommands](https://github.com/CycloneDX/cyclonedx-gomod?tab=readme-ov-file#subcommands) for the full list of options.
+
 ## Multi-Ecosystem Tools
 ### cdxgen
 * Website: https://cyclonedx.github.io/cdxgen
@@ -225,7 +387,7 @@ A complete workflow example for SBOM generation and upload to DependencyTrack ca
 * Generate an SBOM for cwd for a Multi-Language project: `cdxgen -t <lang> -t <lang> .`  
 ---
 
-### Github Action: cdxgen
+### cdxgen-action
 * Website: https://github.com/marketplace/actions/cdxgen
 * Source: https://github.com/CycloneDX/cdxgen-action
 
@@ -258,7 +420,6 @@ Workflow can be defined that integrate a variation of following steps:
     serverUrl: "<server_url>"
     apiKey: ${{ secrets.apiKey }}
 ```
-
 * Upload to dependency track server and store artefacts:
 ```
 - uses: AppThreat/cdxgen-action@v1
@@ -271,4 +432,3 @@ Workflow can be defined that integrate a variation of following steps:
     name: sboms
     path: sboms
 ```
----
