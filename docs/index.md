@@ -25,5 +25,11 @@ vulnerabilities/index.md
 ```{toctree}
 :maxdepth: 2
 
+sbom/index.md
+```
+
+```{toctree}
+:maxdepth: 2
+
 references/index.md
 ```
