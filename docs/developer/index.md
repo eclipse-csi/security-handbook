@@ -6,4 +6,5 @@
 account.md
 machine.md
 environment.md
+branches.md
 ```
