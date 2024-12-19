@@ -52,16 +52,14 @@ A summarized version of Dependabot's main features:
 
 ### Security Alerts
 #### Setup
-To enable Dependabot alerts, go to **Github repository** -> **Settings** -> **Code Security** and click Enable for **Dependabot alerts**. A pre-requisite is to also have **Dependency graph** enabled.
+To enable Dependabot alerts for projects via [Otterdog](https://otterdog.readthedocs.io/en/latest/), set `dependabot_alerts_enabled` to `True` in the repository's configuration file. More details about properties can be found in the official [documentation](https://otterdog.readthedocs.io/en/latest/reference/organization/repository/).
 
 >**Dependabot alerts**  
 >Receive alerts for vulnerabilities that affect your dependencies and manually generate Dependabot pull requests to resolve these vulnerabilities.  
 
-For steps on how to enable Dependabot alerts at different levels, check out [Configuring dependabot alerts](https://docs.github.com/en/code-security/dependabot/dependabot-alerts/configuring-dependabot-alerts).
+Enabling Dependabot alerts by default for new repositories at organization level can be achieved through [Organization Settings](https://otterdog.readthedocs.io/en/latest/reference/organization/settings/), such as `dependabot_alerts_enabled_for_new_repositories`. Check out [Validation rules](https://otterdog.readthedocs.io/en/latest/reference/organization/settings/#validation-rules) for setting pre-requisites.
 
 #### Configuration
-Low-impact alerts for development dependencies are disabled by default, if you need to enable them, go to **Github repository** -> **Settings** -> **Code Security** -> **Dependabot alerts** -> **Dependabot rules** and toggle **Dismiss low-impact alerts for development-scoped dependencies** to Enabled.
-
 To configure notifications options for security alerts, go to **Your Profile icon** -> **Settings** -> **Notifications** -> **Dependabot alerts: New vulnerabilities** and select notification channel preferences and cadence.
 
 #### Triage
@@ -86,12 +84,12 @@ A quickstart tutorial on Dependabot Security Alerts can be found at [Dependabot 
 
 ### Security Updates
 #### Setup
-To enable Dependabot Security Updates, go to **Github repository** -> **Settings** -> **Code Security** and click Enable for **Dependabot security updates**. A pre-requisite is to also have **Dependency graph** and **Dependabot alerts** enabled. 
+To enable Dependabot security updates for projects via [Otterdog](https://otterdog.readthedocs.io/en/latest/), set `dependabot_security_updates_enabled` to `True` in the repository's configuration file. More details about properties can be found in the official [documentation](https://otterdog.readthedocs.io/en/latest/reference/organization/repository/).
 
 >**Dependabot security updates**  
 >Enabling this option will result in Dependabot automatically attempting to open pull requests to resolve every open Dependabot alert with an available patch. If you would like more specific configuration options, leave this disabled and use [Dependabot auto triage rules](https://docs.github.com/en/code-security/dependabot/dependabot-auto-triage-rules/about-dependabot-auto-triage-rules).
 
-Alternatively, a `dependabot.yml` file can be added in the `.github` directory of the repository to configure Dependabot security alerts.
+Enabling Dependabot security updates by default for new repositories at organization level can be achieved through [Organization Settings](https://otterdog.readthedocs.io/en/latest/reference/organization/settings/), such as `dependabot_security_updates_enabled_for_new_repositories`. Check out [Validation rules](https://otterdog.readthedocs.io/en/latest/reference/organization/settings/#validation-rules) for setting pre-requisites.
 
 #### Workflow
 Dependabot security updates are automated pull requests that help you update dependencies with known vulnerabilities.
