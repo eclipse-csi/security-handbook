@@ -19,6 +19,12 @@ developer/index.md
 ```{toctree}
 :maxdepth: 2
 
+project/index.md
+```
+
+```{toctree}
+:maxdepth: 2
+
 vulnerabilities/index.md
 ```
 
