@@ -73,8 +73,8 @@ The second section covers repository specific checks, encompassing topics such a
 |                            | Eclipse hosted Jenkins                       |
 |                            | Other                                        |
 | **Security Posture**       | Aware of Scorecard report                    |
-|                            | OpenSFF Scorecard Otterdog Integration       |
-|                            | OpenSFF Scorecard                            |
+|                            | OpenSSF Scorecard Otterdog Integration       |
+|                            | OpenSSF Scorecard                            |
 |                            | -- Branch Protection                         |
 |                            | -- Token-Permissions                         |
 |                            | -- Security Policy (Project specific)        |
