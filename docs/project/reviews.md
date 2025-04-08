@@ -1,8 +1,8 @@
-# Security Mini-Review
+# Rapid Security Review
 
-A Security Mini Review is a lightweight security assessment designed to help projects strenghten their overall security posture. It provides an easy to use  framework comprising checks from a wide variety of topics, such as: security automation and tooling, secure development practices, incident preparedness, monitoring and visibility, security policies and project setup.
+A Rapid Security Review is a lightweight security assessment designed to help projects strenghten their overall security posture. It provides an easy to use framework comprising checks from a wide variety of topics, such as: security automation and tooling, secure development practices, incident preparedness, monitoring and visibility, security policies and project setup.
 
-The EF Security Team will be conductiong project mini reviews with the goal of providing guidance and actionable recommendations to help projects strengthen their security posture. Rather than just identifying gaps, we focus on offering clear, practical steps maintainers can take to improve security in meaningful ways. 
+The EF Security Team will be conducting Rapid Security Reviews with the goal of providing guidance and actionable recommendations to help projects strengthen their security posture. Rather than just identifying gaps, we focus on offering clear, practical steps maintainers can take to improve security in meaningful ways. 
 
 We maintain a queue of projects for these reviews, and while we prioritize based on impact and need, we welcome projects that wish to volunteer for a review. If you're interested in having your project assessed, reach out to us and we will do our best to accommodate as many as possible. 
 
