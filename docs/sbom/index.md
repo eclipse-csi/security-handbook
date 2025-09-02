@@ -6,5 +6,6 @@
 introduction.md
 howto.md
 tooling.md
+registry.md
 earlyadopters.md
 ```
