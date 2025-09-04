@@ -121,7 +121,7 @@ Our DependencyTrack instance is a centralized place where all EF projects can up
 
 To upload an SBOM to our DependencyTrack instance, first reach out to the EF Security Team with your desired project hierarchy i.e. number of products, their names. We will generate entries and get back to you with a list of `parentProject` IDs.
 
-Then, simply append the below at the end of the SBOM generation workflow. Make sure to the job that generates the SBOM has the name `generate-sbom` and outputs `project-version` with the version of the product.
+Then, simply append the below at the end of the SBOM generation workflow. Make sure the job that generates the SBOM has the name `generate-sbom` and outputs `project-version` with the version of the product.
 
 ```
   store-sbom-data: 

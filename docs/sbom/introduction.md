@@ -14,7 +14,7 @@ The primary purpose of an SBOM is to ensure transparency and accountability in s
 Additionally, SBOMs empower software consumers and contributors to evaluate the security, quality and license compliance of the software they use and develop, creating a more trustworthy open source ecosystem.
 
 ## Security Considerations
-From a security perspective, SBOMs are invaluable due to their inherent trait, that of providing visibility into the elemenents that make up a software projects. 
+From a security perspective, SBOMs are invaluable due to their inherent trait, that of providing visibility into the elements that make up a software project. 
 
 When facing supply chain concerns, these inventories enable organizations to quickly and efficiently answer questions such as "Am I affected?" and "Where am I affected?", providing support into identifying and mitigating vulnerabilities in a timely manner.
 

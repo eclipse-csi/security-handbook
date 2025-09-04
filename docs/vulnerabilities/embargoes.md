@@ -6,7 +6,7 @@ Readers of this document should be familiar with terms and definitions of the [E
 
 ## What is an embargo?
 
-An *embargo* is a term used to name the period of time from the moment a vulnerability is disclosed to the vendor, to the moment it is made public by the announce of the CVE number (Common Vulnerabilities Enumeration), a fix in the release notes, a security advisory, or any other public communication.
+An *embargo* is a term used to name the period of time from the moment a vulnerability is disclosed to the vendor, to the moment it is made public by the announcement of the CVE number (Common Vulnerabilities and Exposures), a fix in the release notes, a security advisory, or any other public communication.
 
 The period of embargo allows the affected project to investigate, prepare the fix, test it, and prepare documentation. People who have access to the information on the vulnerability during the embargo period *must* keep it confidential. An embargo can last from a few hours (when the fix is easy low-risk, and the project releases a bugfix release immediately) to months or sometimes even years (usually for complex hardware vulnerabilities).
 
@@ -24,7 +24,7 @@ Multi-project embargoes are usually used for high impact issues that could cause
 
 In a case of a wide embargo, Projects need to synchronize on release dates, and if it makes sense, also share test cases, and prepare a common advisory. They either communicate using an ad-hoc distribution list, or use a dedicated disclosure platform.
 
-An invitation to such a disclosure group usually arrives to the Projects security contact, or to some specific developer directly if they are known to deal with security issues. In case of Eclipse Foundation projects (also other projects hosted by foundations), such an invitation also often comes to the generic security contact of the Foundation. In the case of Eclipse Foundation, this will be the EF Security Team that will follow it to the affected project or projects. Note the importance of *up-to-date security contacts* known both publicly and by the EF Security Team. If the researcher cannot find the contact information, your Project might miss the notification and learn about the vulnerability late.
+An invitation to such a disclosure group usually arrives to the Projects security contact, or to some specific developer directly if they are known to deal with security issues. In case of Eclipse Foundation projects (also other projects hosted by foundations), such an invitation also often comes to the generic security contact of the Foundation. In the case of Eclipse Foundation, this will be the EF Security Team that will forward it to the affected project or projects. Note the importance of *up-to-date security contacts* known both publicly and by the EF Security Team. If the researcher cannot find the contact information, your Project might miss the notification and learn about the vulnerability late.
 
 During the embargo time, it is important to not post any information of the vulnerability, nor a suggestion of one, in any channels. This includes references to security fixes in commit messages, release notes, announcements or even a Project-specific chat. All involved Projects release their bugfix versions at the same date or shortly after. Only then the Project can put information on the vulnerability in the documentation.
 
@@ -36,7 +36,7 @@ Note: There exist also specific, long-term embargo lists that get used for embar
 
 ## Developing a fix under an embargo
 
-If you are developing a fix for an issue under an embargo, you should use private forks and private CI (continous integration). As a general guideline:
+If you are developing a fix for an issue under an embargo, you should use private forks and private CI (continuous integration). As a general guideline:
 
 * Do not push fixes under embargo to public branches or repositories until agreed with the disclosure coordinator;
 * Use a local CI copy. It can be either a setup running on the developer's machine, an in-premises copy, or a special private CI run spawned by the Eclipse Foundation IT team;
@@ -60,7 +60,7 @@ In the case of Open Source projects, a restricted number of levels is useful. Th
 
 - I get a request to join a disclosure platform like [Vince](https://kb.cert.org/vince/) to discuss disclosure. What to do?
 
-Contact the Eclipse Foundation Security team that likely already has access to that platform and can add Projectadd a Project representatives to the case.
+Contact the Eclipse Foundation Security team that likely already has access to that platform and can add Project representatives to the case.
 
 - How do we get notified about a multi-project embargo?
 
