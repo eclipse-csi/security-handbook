@@ -65,7 +65,7 @@ To configure notifications options for security alerts, go to **Your Profile ico
 #### Triage
 To view the security alerts that have triggered for a repository, go to  **Github repository** -> **Security** -> **Dependabot**. Alerts can be filtered by Package, Ecosystem, Manifest, Severity, Status. 
 
-To triage the alerts, an individual assessment can be performed on the alert content. Most security alerts include the following information: whether Dependabot created a Pull Request to fix it, package involved, affected versions, patched version, brief description of the vulnerabilit. Additionally, CVE data such as: Severity, CVSS score, CWEs (Weaknesses), Github Advisory is included.
+To triage the alerts, an individual assessment can be performed on the alert content. Most security alerts include the following information: whether Dependabot created a Pull Request to fix it, package involved, affected versions, patched version, brief description of the vulnerability. Additionally, CVE data such as: Severity, CVSS score, CWEs (Weaknesses), Github Advisory is included.
 
 #### Resolution
 After completing the alert analysis, you can choose to fix or dismiss it.
@@ -101,7 +101,7 @@ Pull requests should contain everything needed to safely review and merge a prop
 When a security update PR is merged, the corresponding Dependabot alert is automatically marked as resolved for your repository.
 
 #### Environment
-For a repository that has GitHub Actions enabled, Dependabot will security updates jobs on GitHub Actions by default. Otherwise, security updates will run on the legacy application in Github.
+For a repository that has GitHub Actions enabled, Dependabot will run security updates jobs on GitHub Actions by default. Otherwise, security updates will run on the legacy application in Github.
 
 For performance, visibility and control considerations, it is recommended to enable running Dependabot Security Updates as GitHub Actions jobs. To do so, enable **GitHub Actions** and **Dependabot on Actions runners** from the repository's **Code security and analysis** settings page.
 

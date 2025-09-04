@@ -8,7 +8,7 @@ Readers of this document should be familiar with terms and definitions of the [E
 
 ## What is the difference between a CVE entry and a security advisory?
 
-Security advisories extend and organize vulnerability descriptions like CVEs (Common Vulnerability Enumeration). CVEs have strict format and concentrate on the vulnerabilities discovered: their cause, severity, exploitation possibilities. They are designed to help security researchers to talk about issues precisely. A CVE describes a single vulnerability only.
+Security advisories extend and organize vulnerability descriptions like CVEs (Common Vulnerabilities and Exposures). CVEs have a strict format and concentrate on the vulnerabilities discovered: their cause, severity, exploitation possibilities. They are designed to help security researchers to talk about issues precisely. A CVE describes a single vulnerability only.
 
 On the other hand, security advisories are more user-oriented, and more detailed. They might include a detailed discussion about situations or configurations that are vulnerable, and offer a list of possible workarounds. An advisory might also provide a detailed description of the related vulnerability (or vulnerabilities) and describe a series of related vulnerabilities (example: the same vulnerable code pattern) in different modules of the same project or related projects.
 
@@ -38,7 +38,7 @@ As a general rule, security advisories should be released when a release with th
 
 ### Pre-advisories
 
-For some issue projects might want to release pre-advisories, messages stating that there is a pending release with important security fixes. Such a pre-advisory should give the exact date of the release. Pre-advisories help system administrators to plan maintenance and incite them to install updates.
+For some issues projects might want to release pre-advisories, messages stating that there is a pending release with important security fixes. Such a pre-advisory should give the exact date of the release. Pre-advisories help system administrators to plan maintenance and incite them to install updates.
 
 On the other hand, if a fix is already available in the version control system, attackers can usually figure out which commit brings the fix and could develop and deploy exploitation before the official release.
 

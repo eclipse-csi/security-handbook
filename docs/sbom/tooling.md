@@ -64,7 +64,7 @@ More details in can be found in the [official documentation](https://cyclonedx.g
 ```
 
 ### Configuration
-The CycloneDX Maven Plugin offers several configuration options that allow customization of how the SBOM is generated for the project, such as: tool version, output format, output location, whether to include license text, whether to include specific dependencies, whether attach it to the build artifacts.
+The CycloneDX Maven Plugin offers several configuration options that allow customization of how the SBOM is generated for the project, such as: tool version, output format, output location, whether to include license text, whether to include specific dependencies, whether to attach it to the build artifacts.
 
 Below is an example of the **default** configuration:
 
@@ -182,7 +182,7 @@ For projects that use GitHub Actions, a workflow can be defined with steps for:
           name: bom.json
           path: bom.json
 ```
-A complete workflow example for SBOM generation and upload to DependencyTrack can be found here: [generate-sbom.yml](https://github.com/eclipse-csi/otterdog/blob/main/.github/workflows/generate-.sbom.yml).
+A complete workflow example for SBOM generation and upload to DependencyTrack can be found here: [generate-sbom.yml](https://github.com/eclipse-csi/otterdog/blob/main/.github/workflows/generate-sbom.yml).
 
 ---
 ### gh-python-generate-sbom
@@ -272,7 +272,7 @@ Depends on installation method, project details and CI tools.
 * Install via yarn: `yarn add -D @cyclonedx/webpack-plugin`
 
 ### Usage
-Initialize and confifure the plugin through:  
+Initialize and configure the plugin through:  
 ```new CycloneDxWebpackPlugin(options?: object)```
 
 ### Configuration
@@ -411,7 +411,7 @@ To simply print the SBOM to console, add the following step to a workflow:
 uses: AppThreat/cdxgen-action@v1
 ```
 ### Integration
-Workflow can be defined that integrate a variation of following steps:
+Workflows can be defined that integrate a variation of the following steps:
 * Upload to dependency track server
 ```
 - uses: AppThreat/cdxgen-action@v1
