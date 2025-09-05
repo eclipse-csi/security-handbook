@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Eclipse Security Handbook'
-copyright = '2024, Eclipse Foundation'
+copyright = '2024, Eclipse Foundation. Licensed under EPL-2.0'
 author = 'Eclipse Foundation'
 
 # -- General configuration ---------------------------------------------------
