@@ -119,7 +119,9 @@ Once a functional workflow to generate SBOMs is created, the next question that 
 
 Our DependencyTrack instance is a centralized place where all EF projects can upload their SBOMs. This way they are easier to find through a web interface, have versioning and are enriched with vulnerability data.
 
-To upload an SBOM to our DependencyTrack instance, first reach out to the EF Security Team with your desired project hierarchy i.e. number of products, their names. We will generate entries and get back to you with a list of `parentProject` IDs.
+To upload an SBOM to our DependencyTrack instance, first reach out to the EF Security Team with your desired project hierarchy i.e. number of products, their names. We will generate entries and get back to you with a list of `parentProject` IDs. 
+
+> **Note**: Due to Dependency-Track limitations, no two (non-SBOM) entries across the platform can have the same name, even if their parents differ (see [this issue](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/6352#note_4632960) for more details). We highly encourage choosing names that are unique to the project across the entire hierarchy.
 
 Then, simply append the below at the end of the SBOM generation workflow. Make sure the job that generates the SBOM has the name `generate-sbom` and outputs `project-version` with the version of the product.
 
@@ -134,5 +136,7 @@ Then, simply append the below at the end of the SBOM generation workflow. Make s
       bomFilename: 'bom.json'
       parentProject: '<parentProject_ID>' # provisioned by us
 ```
+
+> **Note**: Although SBOM entries may share the same name (`projectName`) across multiple projects, due to Dependency-Track limitations, UI issues might appear (see [this issue](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/6956) for more details). We highly encourage using project specific `projectName` values. For example, instead of using `milestone` as a name for your project SBOMs, consider choosing a unique value, such as `<project>-milestone`.
 
 `store-sbom-data` stores the SBOM and additional metadata in a predefined format. Otterdog picks the artifacts up upon workflow completion and automatically uploads the SBOM to the DependencyTrack instance.
