@@ -24,6 +24,7 @@ By integrating SBOM generation into your project workflow, you’re taking a pro
 We encourage all open-source projects to adopt SBOM generation as a regular part of their development process, fostering a more secure, trustworthy ecosystem for developers and users alike.
 
 ## Further Reading
+* [Eclipse Foundation Security Training 2025 | SBOMs, Dependency Tracking](https://www.youtube.com/watch?v=gotOnATJu4E&list=PLy7t4z5SYNaT7JN8FIVTGAy1QUnLTdv9R&index=8)
 * [SBOM Resources Library - CISA](https://www.cisa.gov/topics/cyber-threats-and-advisories/sbom/sbomresourceslibrary)
 * [SBOM at a Glance - NTIA](https://www.ntia.gov/sites/default/files/publications/sbom_at_a_glance_apr2021_0.pdf)
 * [SBOM Explainer Videos on Youtube (2020-2021) - NTIAGov](https://www.youtube.com/playlist?list=PLO2lqCK7WyTDpVmcHsy6R2HWftFkUp6zG)
