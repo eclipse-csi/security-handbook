@@ -17,7 +17,7 @@ This page introduces a selection of tools that **generate** SBOMs for projects w
 Once a suitable generation tool is selected, we recommend consulting our [How to generate and upload SBOMs](./howto.md) guide. This guide is a concise tutorial that focuses on integrating SBOM generation into the project's existing CI/CD pipelines to automatically produce SBOMs for new releases and upload them to our SBOM Registry.
 
 ## Java
-Java is a compiled language, meaning an SBOM should be generated whenever a release version of the project is built. Since Java build systems are responsible for downloading all the dependencies required to compile and package the project, the optimal choice is to generate an SBOM during the build process. 
+Java is a compiled language, meaning an SBOM should be generated whenever a release version of the project is built. Since Java build systems are responsible for downloading all the dependencies required to compile and package the project, the optimal choice is to generate an SBOM during the build process.
 
 ## Maven
 ### CycloneDX for Maven
@@ -115,9 +115,9 @@ plugins {
 
 To generate the SBOM, run the `gradle cyclonedxBom` command. The default location for the generated SBOM is `build/reports/`.
 
->In Gradle, SBOM generation with the CycloneDX plugin requires a manual setup within CI, as it doesn’t automatically align with predefined build phases like Maven does. The details depend on project specifics, but in broad terms, in order to integrate, invoking the cyclonedxBom task directly in the CI pipeline after successful builds is necessary. This ensures an SBOM is generated with each stable release. 
+>In Gradle, SBOM generation with the CycloneDX plugin requires a manual setup within CI, as it doesn’t automatically align with predefined build phases like Maven does. The details depend on project specifics, but in broad terms, in order to integrate, invoking the cyclonedxBom task directly in the CI pipeline after successful builds is necessary. This ensures an SBOM is generated with each stable release.
 
-As opposed to Maven's `goals`, Gradle relies on the single `cyclonedxBom` task, meaning it appears to be generating a single SBOM for the project, instead of one per artifact. 
+As opposed to Maven's `goals`, Gradle relies on the single `cyclonedxBom` task, meaning it appears to be generating a single SBOM for the project, instead of one per artifact.
 
 ### Configuration
 The CycloneDX Gradle Plugin offers several configuration options, detailed in the plugin [README](https://github.com/CycloneDX/cyclonedx-gradle-plugin). To customise the configuration for your project, simply append it to the `gradle` file.
@@ -158,12 +158,12 @@ Examples of SBOM generation pipelines for Gradle can be found on our [SBOM Early
 * Call script: `cyclonedx-py <source> -o sbom.json`
 * Call python module CLI: `python3 -m cyclonedx_py <source> -o sbom.json`
 
-Supported data sources: 
+Supported data sources:
 * Python (virtual) environment
 * Poetry manifest and lockfile
 * Pipenv manifest and lockfile
 * Pip's `requirements.txt` format
-* PDM's Python virtual environments 
+* PDM's Python virtual environments
 * conda's Python environments
 
 ---
@@ -201,7 +201,7 @@ As per the official website above, CycloneDX BOM is a "meta-package", a collecti
 | React            | [cyclonedx/webpack-plugin with React](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin?activeTab=readme#user-content-use-with-react)               |
 | Rollup           | [rollup-plugin-sbom](https://www.npmjs.com/package/rollup-plugin-sbom?activeTab=readme)                                  |
 | Vite             | [rollup-plugin-sbom with Vite](https://www.npmjs.com/package/rollup-plugin-sbom?activeTab=readme#usage-with-vite)                        |
-| webpack          | [cyclonedx/webpack-plugin](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin) 
+| webpack          | [cyclonedx/webpack-plugin](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin)
 
 ## NPM
 ### cyclonedx-npm
@@ -218,8 +218,8 @@ As per the official website above, CycloneDX BOM is a "meta-package", a collecti
 * If installed via npx/project dependency: `npx @cyclonedx/cyclonedx-npm --help`
 
 Supported data sources:
->As per [cyclonedx-node-npm/docs/how.md](https://github.com/CycloneDX/cyclonedx-node-npm/blob/main/docs/how.md), this tool utilizes npm-ls on the target project and parses its output.  
->This way the tool does not depend on libraries that are already part of npm. All logic and analysis is done by npm itself, the output is just interpreted and used.  
+>As per [cyclonedx-node-npm/docs/how.md](https://github.com/CycloneDX/cyclonedx-node-npm/blob/main/docs/how.md), this tool utilizes npm-ls on the target project and parses its output.
+>This way the tool does not depend on libraries that are already part of npm. All logic and analysis is done by npm itself, the output is just interpreted and used.
 >Sometimes npm-ls got hiccups - caused by individual broken project installation or bugs with npm. Then, this tool may also read `package.json` files inside the node_module directory as an additional information source.
 
 ### Examples
@@ -232,9 +232,9 @@ Examples of SBOM generation pipelines for NPM can be found on our [SBOM Early Ad
 
 ### Installation
 * Zero-install
-* Install as a development dependency of the current project (cli-wrapper):  
+* Install as a development dependency of the current project (cli-wrapper):
  `yarn add --dev @cyclonedx/yarn-plugin-cyclonedx`
-* Install the [latest version from Github](https://github.com/CycloneDX/cyclonedx-node-yarn/releases/tag/v1.0.2):  
+* Install the [latest version from Github](https://github.com/CycloneDX/cyclonedx-node-yarn/releases/tag/v1.0.2):
 ```yarn plugin import https://github.com/CycloneDX/cyclonedx-node-yarn/releases/latest/download/yarn-plugin-cyclonedx.cjs```
 
 ### Usage
@@ -257,7 +257,7 @@ Examples of SBOM generation pipelines for Yarn can be found on our [SBOM Early A
 * Install via yarn: `yarn add -D @cyclonedx/webpack-plugin`
 
 ### Usage
-Initialize and configure the plugin through:  
+Initialize and configure the plugin through:
 ```new CycloneDxWebpackPlugin(options?: object)```
 
 ### Configuration
@@ -292,7 +292,7 @@ See [extended examples](https://github.com/CycloneDX/cyclonedx-webpack-plugin/tr
 * Install from source: `go install github.com/CycloneDX/cyclonedx-gomod/cmd/cyclonedx-gomod@latest`
 
 ### Usage
-* Simple usage:  
+* Simple usage:
 ```
 cyclonedx-gomod <SUBCOMMAND> [FLAGS...] [<ARG>...]
 ```
@@ -300,14 +300,14 @@ cyclonedx-gomod <SUBCOMMAND> [FLAGS...] [<ARG>...]
 Subcommands:
 * `app`: Generate SBOMs for applications, include only those modules that the target application
   actually depends on
-* `mod`: Generate SBOMs for modules, include the aggregate of modules required by all 
+* `mod`: Generate SBOMs for modules, include the aggregate of modules required by all
   packages in the target module (optionally includes modules required by
   tests and test packages)
 * `bin`: Generate SBOMs for binaries
 * `version`: Show version information
 
 More info about subcommands and usage can be found in [README:Usage](https://github.com/CycloneDX/cyclonedx-gomod?tab=readme-ov-file#usage).
-SBOM examples for each subcommand can be found in the [examples](https://github.com/CycloneDX/cyclonedx-gomod/tree/main/examples) directory. 
+SBOM examples for each subcommand can be found in the [examples](https://github.com/CycloneDX/cyclonedx-gomod/tree/main/examples) directory.
 
 ### Configuration
 Options can be configured through flags, depending on the subcommand of choice. See [README:Subcommands](https://github.com/CycloneDX/cyclonedx-gomod?tab=readme-ov-file#subcommands) for the full list of options.
