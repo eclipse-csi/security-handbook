@@ -1,18 +1,18 @@
 # Tooling Ecosystem for CycloneDX
 This page introduces a selection of tools that **generate** SBOMs for projects written in various programming languages and across different ecosystems. While not exhaustive, it aims to offer a starting point for creating SBOMs in the CycloneDX format.
 
-| **Environment**     | **Ecosystem/Build System** | **Tool**                                                      |
-|---------------------|----------------------------|---------------------------------------------------------------|
-| **Java**            | Maven                      | [cyclonedx-for-maven](#cyclonedx-for-maven)                   |
-|                     | Gradle                     | [cyclonedx-for-gradle](#cyclonedx-for-gradle)                 |
-| **Python**          | All                        | [cyclonedx-for-python](#cyclonedx-for-python)                 |
-|                     | Github Actions             | [gh-python-generate-sbom](#gh-python-generate-sbom)           |
-| **Nodejs**          | All                        | [cyclonedx-bom](#cyclonedx-bom)                               |
-|                     | NPM                        | [cyclonedx-npm](#cyclonedx-npm)                               |
-|                     | Yarn                       | [yarn-plugin-cyclonedx](#yarn-plugin-cyclonedx)               |
-|                     | React                      | [webpack-plugin with React](#webpack-plugin-with-react)       |
-| **Go**              | Modules                    | [cyclonedx-gomod](#cyclonedx-gomod)                           |
-| **Multi-Ecosystem** | All                        | [cdxgen](#cdxgen)                                             |
+| **Environment**     | **Ecosystem/Build System** | **Tool**                                                                 |
+|---------------------|----------------------------|--------------------------------------------------------------------------|
+| **Java**            | Maven                      | [cyclonedx-for-maven](#cyclonedx-for-maven)                              |
+|                     | Gradle                     | [cyclonedx-for-gradle](#cyclonedx-for-gradle)                            |
+| **Python**          | All                        | [cyclonedx-for-python](#cyclonedx-for-python)                            |
+|                     | Github Actions             | [gh-python-generate-sbom](#gh-python-generate-sbom)                      |
+| **Nodejs**          | All                        | [cyclonedx-bom](#cyclonedx-bom)                                          |
+|                     | NPM                        | [cyclonedx-npm](#cyclonedx-npm)                                          |
+|                     | Yarn                       | [yarn-plugin-cyclonedx](#yarn-plugin-cyclonedx)                          |
+|                     | React                      | [webpack-plugin with React](#webpack-plugin-with-react)                  |
+| **Go**              | Modules                    | [cyclonedx-gomod](#cyclonedx-gomod)                                      |
+| **Multi-Ecosystem** | All                        | [cdxgen](#cdxgen), [OSS Review Toolkit](#ORT), [ORT Server](#ORT Server) |
 
 Once a suitable generation tool is selected, we recommend consulting our [How to generate and upload SBOMs](./howto.md) guide. This guide is a concise tutorial that focuses on integrating SBOM generation into the project's existing CI/CD pipelines to automatically produce SBOMs for new releases and upload them to our SBOM Registry.
 
@@ -340,3 +340,48 @@ Supported Languages/Platforms: [Comprehensive List](https://cyclonedx.github.io/
 
 #### Examples
 Examples of SBOM generation pipelines using polyglot tools can be found on our [SBOM Early Adopters](./earlyadopters.md) page.
+
+### ORT
+* Website: https://oss-review-toolkit.org
+* Source: https://github.com/oss-review-toolkit/ort
+
+Supported Languages/Platforms: [Comprehensive List](https://oss-review-toolkit.org/ort/docs/tools/analyzer)
+* C / C++ (Bazel, Conan)
+* Erlang (Rebar3, Mix, Gleam)
+* Golang
+* Haskell
+* Java (Maven, Gradle, sbt)
+* .NET
+* Node.js
+* Python
+* Ruby
+* Rust
+* PHP
+* Swift (SwiftPM, Carthage, Cocoapods)
+
+#### Installation: [Instructions](https://oss-review-toolkit.org/ort/docs/getting-started/installation)
+Via Docker: `docker pull ghcr.io/oss-review-toolkit/ort`
+
+#### Usage
+Generate an SBOM for a local directory under version control:
+* `ort analyze -i <input-dir> -o <output-dir>`
+* `ort report -f CycloneDX -i <output-dir>/analyzer-result.yml -o <output-dir>`
+
+#### Examples
+Usage examples can be found as part of the [tutorial](https://oss-review-toolkit.org/ort/docs/getting-started/tutorial).
+
+### ORT Server
+* Website: https://eclipse-apoapsis.github.io/ort-server
+* Source: https://github.com/eclipse-apoapsis/ort-server
+
+Supported Languages/Platforms: Same as [ORT](#ORT).
+
+#### Installation: [Instructions](https://eclipse-apoapsis.github.io/ort-server/docs/admin-guide/guides/development-helm-chart)
+Via Helm: `helm install release-name oci://ghcr.io/eclipse-apoapsis/charts/ort-server`
+
+#### Usage
+ORT Server is an enterprise-ready server with a REST API and a web front-end.
+It is being user interactively via its UI or the [OSC CLI tool](https://eclipse-apoapsis.github.io/ort-server/docs/user-guide/cli/getting-started) for automation.
+
+#### Examples
+Usage examples can be found as part of the [introduction](https://eclipse-apoapsis.github.io/ort-server/docs/intro).
