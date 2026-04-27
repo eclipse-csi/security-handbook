@@ -6,7 +6,7 @@ This page introduces a selection of tools that **generate** SBOMs for projects w
 | **Java**            | Maven                      | [cyclonedx-for-maven](#cyclonedx-for-maven)                   |
 |                     | Gradle                     | [cyclonedx-for-gradle](#cyclonedx-for-gradle)                 |
 | **Python**          | All                        | [cyclonedx-for-python](#cyclonedx-for-python)                 |
-|                     | Github Actions             | [gh-python-generate-sbom](#gh-python-generate-sbom)|
+|                     | Github Actions             | [gh-python-generate-sbom](#gh-python-generate-sbom)           |
 | **Nodejs**          | All                        | [cyclonedx-bom](#cyclonedx-bom)                               |
 |                     | NPM                        | [cyclonedx-npm](#cyclonedx-npm)                               |
 |                     | Yarn                       | [yarn-plugin-cyclonedx](#yarn-plugin-cyclonedx)               |
@@ -193,15 +193,15 @@ Examples of SBOM generation pipelines for Python can be found on our [SBOM Early
 
 As per the official website above, CycloneDX BOM is a "meta-package", a collection of optional dependencies. The dependencies are tools with the common purpose of generating SBOMs for node-based projects. To identify the optimal tooling for your ecosystem, check the table bellow or the [README](https://github.com/CycloneDX/cyclonedx-node-module/blob/master/README.md) of the project for the most up to date information about available tooling.
 
-| Ecosystem/System | Actual Tool                          |
-|-----------|--------------------------------------|
-| npm       | [cyclonedx/cyclonedx-npm](https://www.npmjs.com/package/%40cyclonedx/cyclonedx-npm)            |
-| yarn      | [cyclonedx/yarn-plugin-cyclonedx](https://www.npmjs.com/package/%40cyclonedx/yarn-plugin-cyclonedx)    |
-| Angular          | [cyclonedx/webpack-plugin with Angular](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin?activeTab=readme#user-content-use-with-angular)              |
-| React            | [cyclonedx/webpack-plugin with React](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin?activeTab=readme#user-content-use-with-react)               |
-| Rollup           | [rollup-plugin-sbom](https://www.npmjs.com/package/rollup-plugin-sbom?activeTab=readme)                                  |
-| Vite             | [rollup-plugin-sbom with Vite](https://www.npmjs.com/package/rollup-plugin-sbom?activeTab=readme#usage-with-vite)                        |
-| webpack          | [cyclonedx/webpack-plugin](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin)
+| Ecosystem/System | Actual Tool                                                                                                                                       |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| npm              | [cyclonedx/cyclonedx-npm](https://www.npmjs.com/package/%40cyclonedx/cyclonedx-npm)                                                               |
+| yarn             | [cyclonedx/yarn-plugin-cyclonedx](https://www.npmjs.com/package/%40cyclonedx/yarn-plugin-cyclonedx)                                               |
+| Angular          | [cyclonedx/webpack-plugin with Angular](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin?activeTab=readme#user-content-use-with-angular) |
+| React            | [cyclonedx/webpack-plugin with React](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin?activeTab=readme#user-content-use-with-react)     |
+| Rollup           | [rollup-plugin-sbom](https://www.npmjs.com/package/rollup-plugin-sbom?activeTab=readme)                                                           |
+| Vite             | [rollup-plugin-sbom with Vite](https://www.npmjs.com/package/rollup-plugin-sbom?activeTab=readme#usage-with-vite)                                 |
+| webpack          | [cyclonedx/webpack-plugin](https://www.npmjs.com/package/%40cyclonedx/webpack-plugin)                                                             |
 
 ## NPM
 ### cyclonedx-npm
