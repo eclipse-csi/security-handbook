@@ -331,12 +331,12 @@ Supported Languages/Platforms: [Comprehensive List](https://cyclonedx.github.io/
 * Swift
 * OpenAPI
 
-### Installation: [Instructions](https://cyclonedx.github.io/cdxgen/#/CLI?id=installing)
+#### Installation: [Instructions](https://cyclonedx.github.io/cdxgen/#/CLI?id=installing)
 * Via Npm: ```npm install -g @cyclonedx/cdxgen``` or ```npm install -g @cyclonedx/cdxgen@<version>```
 * Via Homebrew: ```brew install cdxgen```
 
-### Usage
+#### Usage
 * Generate an SBOM for cwd: `cdxgen -r -o <path>/bom.json --deep`
 
-### Examples
+#### Examples
 Examples of SBOM generation pipelines using polyglot tools can be found on our [SBOM Early Adopters](./earlyadopters.md) page.
