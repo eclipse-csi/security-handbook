@@ -105,9 +105,11 @@ jobs:
 
 In addition to being automatically triggered on new releases, the workflow above supports manual runs. It allows specifying a specific branch, commit or sha value to check out the repository and generate the SBOM from.
 
->Make sure dependencies are pinned in Github Actions workflows, as this ensures stability and security by preventing unexpected updates or potential supply chain attacks. An alternative tool that can help in with pinning to commit SHAs is [Octopin](https://github.com/eclipse-csi/octopin)
+>Make sure dependencies are pinned in Github Actions workflows, as this ensures stability and security by preventing unexpected updates or potential supply chain attacks. An alternative tool that can help in with pinning to commit SHAs is [pinact](https://github.com/suzuki-shunsuke/pinact).
 
 The `project-version` output is then used in a subsequent job to upload the SBOM to our DependencyTrack instance.
+
+> **Deprecated**: The example above is written for the deprecated [`store-sbom-data`](#deprecated-upload-via-store-sbom-data) upload. With the [GitHub Actions](#github-actions) upload, the `Upload sbom` step is no longer needed, because the SBOM is uploaded directly from the same job. The version is passed to the next step as `product-version`, so it does not need to be shared across jobs as an output anymore.
 
 ### Github Actions: Other ecosystems
 We maintain a list of examples on our [Early Adopters page](./earlyadopters.md) from projects that benefited from our hands-on implementation support. As it is organized by ecosystem, with links to their SBOM generation and upload GitHub Actions workflows, these examples can provide guidance on approaches to SBOM generation within different project ecosystems. 
@@ -120,17 +122,88 @@ Once a functional workflow for generating SBOMs is established, the next conside
 
 To address this, our [SBOM Registry](./registry.md), a Dependency-Track instance, serves as a centralized repository where all projects can upload their SBOMs. The registry, equiped with a web-based interface available to all, provides project consumers with immediate visibility into the security posture and risk profile of a given project, while enabling project maintainers to efficiently identify, prioritize, and remediate vulnerabilities across versions and dependencies.
 
-We highly encourage all Eclipse Foundation projects to upload their SBOMs to this registry. To achieve this, the process consists of two steps:
+We highly encourage all Eclipse Foundation projects to upload their SBOMs to this registry. Uploads are authenticated through the **Project Identity Authority (PIA)**, which lets a CI/CD workload upload an SBOM for a given product with its own workload identity, without any long-lived credentials or shared secrets.
 
-1. Reach out to the us (EF Security Team) by opening an issue in [HelpDesk](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues). The issue should contain your desired project hierarchy i.e. number of products, their names. We will generate entries and get back to you with a list of `parentProject` IDs.
+The process consists of two steps:
 
-> **Note**: Due to Dependency-Track limitations, no two (non-SBOM) entries across the platform can have the same name, even if their parents differ (see [this issue](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/6352#note_4632960) for more details). We highly encourage choosing names that are unique to the project across the entire hierarchy.
+1. Request upload permission for your project (see [Prerequisite](#prerequisite-request-upload-permission) below).
+2. Implement the SBOM upload logic in your CI/CD pipeline (see [GitHub Actions](#github-actions) or [Jenkins](#jenkins) below).
 
-2. Implement the SBOM upload logic
+### Prerequisite: request upload permission
 
-To support this, we are making efforts to provide plug-and-play upload integrations for all CI/CD platforms that can be used out of the box with minimal configuration (see below).
+Before a workload can upload SBOMs, we need to register it with PIA and provision the corresponding entries in DependencyTrack. To request this, open a [HelpDesk](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues) issue with the following:
 
-### Github Actions Support
+- title: `[PROJECT NAME]: Request SBOM upload permission`
+- labels: `service:dependencytrack` and `team:security`
+- **project name**: the Eclipse project the SBOMs belong to, e.g. `technology.openvsx`
+- **product name(s)**: the name of each product you want to upload SBOMs for, as it should appear in DependencyTrack, e.g. `openvsx-server` and `openvsx-webui`
+- **workload name(s)**: the CI/CD workload(s) that will perform the upload, i.e. the GitHub repository (e.g. `eclipse/openvsx`) or the Jenkins instance per project (e.g. `https://ci.eclipse.org/openvsx`)
+
+We will get back to you once the permissions are in place.
+
+> **Note**: Upload permission is granted per product name. If you want to add or change a product name, or upload from an additional workload, please open a new request.
+
+> **Note**: Due to Dependency-Track limitations, no two (non-SBOM) entries across the platform can have the same name, even if their parents differ. We highly encourage choosing product names that are unique to the project across the entire hierarchy. For example, instead of using `milestone` as a product name, consider a unique value such as `<project>-milestone`.
+
+### GitHub Actions
+
+Add the [`upload-sbom`](https://github.com/eclipse-csi/workflows#upload-sbom) composite action from the [eclipse-csi/workflows](https://github.com/eclipse-csi/workflows) repository to the job that generates the SBOM. See its documentation for usage instructions and the full list of inputs. Use the product name as registered in the request above.
+
+### Jenkins
+
+The snippet below uploads an SBOM from a Jenkins pipeline, using the `id-token` OIDC credential for authentication. The credential is configured on your JIPP (Jenkins Instance Per Project) by the Eclipse Foundation, as part of the request above.
+
+Update `PRODUCT_NAME`, `PRODUCT_VERSION` and `SBOM_PATH` to match your product, and use the product name as registered in the request above.
+
+```groovy
+pipeline {
+    agent any
+
+    environment {
+        PRODUCT_NAME    = '*** REPLACE ***'
+        PRODUCT_VERSION = '*** REPLACE ***'
+        SBOM_PATH       = '*** REPLACE ***'
+        SBOM_API_DOMAIN = 'pia.eclipse.org'
+    }
+
+    stages {
+        stage('Upload SBOM') {
+            steps {
+                withCredentials([
+                    string(
+                        credentialsId: 'id-token',
+                        variable: 'SBOM_ID_TOKEN'
+                    )
+                ]) {
+                    sh '''
+                        base64 -w0 "${SBOM_PATH}" > bom.b64
+                        jq -n \
+                          --arg name "${PRODUCT_NAME}" \
+                          --arg version "${PRODUCT_VERSION}" \
+                          --rawfile bom bom.b64 \
+                          '{
+                            product_name: $name,
+                            product_version: $version,
+                            bom: $bom
+                          }' | \
+                        curl -sS --fail-with-body \
+                          https://${SBOM_API_DOMAIN}/v1/upload/sbom \
+                          -H "Authorization: Bearer ${SBOM_ID_TOKEN}" \
+                          --json @-
+                    '''
+                }
+            }
+        }
+    }
+}
+```
+
+### Deprecated: upload via `store-sbom-data`
+
+> **Deprecated**: The `store-sbom-data` workflow described below is deprecated in favor of the PIA-based [GitHub Actions](#github-actions) upload above, which uploads directly from the workflow instead of relying on Otterdog to pick up artifacts. Existing users are encouraged to migrate; the migration is expected to require minimal effort. Do not use this integration for new setups.
+
+This integration requires a `parentProject` ID, provisioned by the EF Security Team upon request in [HelpDesk](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues).
+
 Simply append the below snippet at the end of the SBOM generation workflow. Make sure the job that generates the SBOM has the name `generate-sbom` and outputs `project-version` with the version of the product.
 
 ```
@@ -148,8 +221,3 @@ Simply append the below snippet at the end of the SBOM generation workflow. Make
 > **Note**: Although SBOM entries may share the same name (`projectName`) across multiple projects, due to Dependency-Track limitations, UI issues might appear (see [this issue](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/6956) for more details). We highly encourage using project specific `projectName` values. For example, instead of using `milestone` as a name for your project SBOMs, consider choosing a unique value, such as `<project>-milestone`.
 
 `store-sbom-data` stores the SBOM and additional metadata in a predefined format. Otterdog picks the artifacts up upon workflow completion and automatically uploads the SBOM to the DependencyTrack instance.
-
-### Jenkins support
-Due to Dependency-Track limitations, we are currently unable to offer out of the box upload support for other CI/CD platforms. We are currently working on a system to circumvent such limitations. An official announcement will be made soon via blog post when the system is available. 
-
-As the migration is expected to require minimal effort, we strongly encourage continued adoption of existing upload integrations in the meantime.
