@@ -1,8 +1,13 @@
 # Security Policy
 
 <!--
-    Adapt this template as needed for your projects. Make sure to replace 
-    `<project>` with your project name.
+    THIS IS A TEMPLATE THAT YOU MUST MODIFIY FOR USE BY YOUR PROJECT.
+    
+    Adapt this template as required:
+
+    * Remove content that does not make sense for your project
+    * Replace <organization> and <repository> with values for your project
+    * Remove the comments
 
     For any questions about implementing security best practices, contact the 
     Eclipse Foundation Security Team at security@eclipse-foundation.org
@@ -10,18 +15,39 @@
 
 This Eclipse Foundation Project adheres to the [Eclipse Foundation Vulnerability Reporting Policy](https://www.eclipse.org/security/policy/).
 
-## Vulnerability Handling
-
-This repository contains code for educational and / or demonstration purposes only and **SHOULD NOT** be used for production.
-
-In general, no CVE IDs will be assigned for vulnerabilities reported to this repository, however the project will strive to fix any reported vulnerability and mention vulnerable released or tagged versions of code in this repository in it's [README.md](https://github.com/<organization/<repository>/blob/main/README.md).
-
 ## How To Report a Vulnerability
 
-If you think you have found a vulnerability in this repository you can report it using one of the following ways:
+If you think you have found a vulnerability in this repository, please report it to us through coordinated disclosure.
 
-* Contact the [Eclipse Foundation Security Team](mailto:security@eclipse-foundation.org) via email
+**Please do not report security vulnerabilities through public issues, discussions, or change requests.**
+
+Instead, report it using one of the following ways:
+
 * Create a [confidential issue](https://gitlab.eclipse.org/security/vulnerability-reports/-/work_items/new?issue[confidential]=true) in the Eclipse Foundation Vulnerability Reporting Tracker
-* **[If hosting on GitHub]** Report a [vulnerability](https://github.com/<organization>/<repository>/security/advisories/new) directly via private vulnerability reporting on GitHub
+* <!-- EDIT THIS LINE IF YOUR PROJECT USES GITHUB ADVISORIES; DELETE IT OTHERWISE --> Report a [vulnerability](https://github.com/<organization>/<repository>/security/advisories/new) directly via private vulnerability reporting on GitHub
 
 You can find more information about reporting and disclosure at the [Eclipse Foundation Security page](https://www.eclipse.org/security/).
+
+Please include as much of the information listed below as you can to help us better understand and resolve the issue:
+
+* The type of issue (e.g., buffer overflow, SQL injection, or cross-site scripting)
+* Affected version(s)
+* Impact of the issue, including how an attacker might exploit the issue
+* Step-by-step instructions to reproduce the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Full paths of source file(s) related to the manifestation of the issue
+* Configuration required to reproduce the issue
+* Log files that are related to this issue (if possible)
+* Proof-of-concept or exploit code (if possible)
+
+This information will help us triage your report more quickly.
+
+## Supported Versions
+
+<!--
+    Which releases of the project's software are actively maintained and receive security updates?
+-->
+Supported versions are:
+
+* Version 1
+* ...
