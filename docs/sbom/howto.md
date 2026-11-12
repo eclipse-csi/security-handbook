@@ -127,7 +127,7 @@ We highly encourage all Eclipse Foundation projects to upload their SBOMs to thi
 The process consists of two steps:
 
 1. Request upload permission for your project (see [Prerequisite](#prerequisite-request-upload-permission) below).
-2. Implement the SBOM upload logic in your CI/CD pipeline (see [GitHub Actions](#github-actions) or [Jenkins](#jenkins) below).
+2. Implement the SBOM upload logic in your CI/CD pipeline (see [GitHub Actions](#github-actions), [GitLab CI](#gitlab-ci) or [Jenkins](#jenkins) below).
 
 ### Prerequisite: request upload permission
 
@@ -137,7 +137,7 @@ Before a workload can upload SBOMs, we need to register it with PIA and provisio
 - labels: `service:dependencytrack` and `team:security`
 - **project name**: the Eclipse project the SBOMs belong to, e.g. `technology.openvsx`
 - **product name(s)**: the name of each product you want to upload SBOMs for, as it should appear in DependencyTrack, e.g. `openvsx-server` and `openvsx-webui`
-- **workload name(s)**: the CI/CD workload(s) that will perform the upload, i.e. the GitHub repository (e.g. `eclipse/openvsx`) or the Jenkins instance per project (e.g. `https://ci.eclipse.org/openvsx`)
+- **workload name(s)**: the CI/CD workload(s) that will perform the upload, i.e. the GitHub repository (e.g. `eclipse/openvsx`), the Eclipse GitLab project (e.g. `https://gitlab.eclipse.org/eclipse/openvsx/openvsx`) or the Jenkins instance per project (e.g. `https://ci.eclipse.org/openvsx`)
 
 We will get back to you once the permissions are in place.
 
@@ -148,6 +148,44 @@ We will get back to you once the permissions are in place.
 ### GitHub Actions
 
 Add the [`upload-sbom`](https://github.com/eclipse-csi/workflows#upload-sbom) composite action from the [eclipse-csi/workflows](https://github.com/eclipse-csi/workflows) repository to the job that generates the SBOM. See its documentation for usage instructions and the full list of inputs. Use the product name as registered in the request above.
+
+### GitLab CI
+
+The snippet below uploads an SBOM from a pipeline on the Eclipse GitLab instance (`gitlab.eclipse.org`), using a GitLab CI/CD [ID token](https://docs.gitlab.com/ci/secrets/id_token_authentication/) for authentication. The token is requested via the `id_tokens` keyword of the job, with audience `pia.eclipse.org`, so no secret needs to be configured.
+
+Update `PRODUCT_NAME`, `PRODUCT_VERSION` and `SBOM_PATH` to match your product, and use the product name as registered in the request above. Add the job to the same pipeline as the job that generates the SBOM, and make the SBOM available to it, e.g. as an artifact of that job via `needs`.
+
+```yaml
+upload-sbom:
+  image: alpine:3.22
+  id_tokens:
+    SBOM_ID_TOKEN:
+      aud: pia.eclipse.org
+  variables:
+    PRODUCT_NAME: '*** REPLACE ***'
+    PRODUCT_VERSION: '*** REPLACE ***'
+    SBOM_PATH: '*** REPLACE ***'
+    SBOM_API_DOMAIN: pia.eclipse.org
+  script:
+    - apk add --no-cache curl jq
+    - base64 -w0 "${SBOM_PATH}" > bom.b64
+    - |
+      jq -n \
+        --arg name "${PRODUCT_NAME}" \
+        --arg version "${PRODUCT_VERSION}" \
+        --rawfile bom bom.b64 \
+        '{
+          product_name: $name,
+          product_version: $version,
+          bom: $bom
+        }' | \
+      curl -sS --fail-with-body \
+        https://${SBOM_API_DOMAIN}/v1/upload/sbom \
+        -H "Authorization: Bearer ${SBOM_ID_TOKEN}" \
+        --json @-
+```
+
+> **Note**: Uploads are only accepted from pipelines triggered by a push (including tags), manually via "Run pipeline", by a pipeline schedule, or via the API. Uploads from merge request pipelines, from pipelines started with a pipeline trigger token, or from forks are rejected. For example, to upload only on releases, add `rules: [{if: $CI_COMMIT_TAG}]` to the job.
 
 ### Jenkins
 
