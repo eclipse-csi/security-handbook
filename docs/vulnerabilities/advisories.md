@@ -16,7 +16,7 @@ Both CVE entries and advisories can be released in a machine-readable format.
 
 ## Process
 
-Security advisories are generally released when a fix and release with the fix is available (for other use-cases see later in this document).  When managing individual vulnerabilities projects should follow the Vulnerability management process from the [Eclipse Foundation Project Handbook](https://www.eclipse.org/projects/handbook/#vulnerability).
+Security advisories are generally released when a fix and release with the fix is available (for other use-cases see later in this document).  When managing individual vulnerabilities projects should follow [Vulnerability Handling for Eclipse Committers and Project Leads](handling.md); writing the advisory is step 12 of that process.
 
 Projects should consider releasing a security advisory in addition to a CVE entry in the following situations:
 

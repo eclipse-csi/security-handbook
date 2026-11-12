@@ -12,7 +12,7 @@ The period of embargo allows the affected project to investigate, prepare the fi
 
 ## Single-project embargoes
 
-In the most common case, a vulnerability affects one Project. The embargo then includes the reporter or reporters of the vulnerability and the Project's Security Team. In this case, the Eclipse Foundation Vulnerability Reporting Process applies directly and there is no need for any special procedures.
+In the most common case, a vulnerability affects one Project. The embargo then includes the reporter or reporters of the vulnerability and the Project's Security Team. In this case, the Eclipse Foundation Vulnerability Reporting Process applies directly and there is no need for any special procedures: follow [Vulnerability Handling for Eclipse Committers and Project Leads](handling.md).
 
 ## Multi-project embargoes
 
@@ -36,15 +36,7 @@ Note: There exist also specific, long-term embargo lists that get used for embar
 
 ## Developing a fix under an embargo
 
-If you are developing a fix for an issue under an embargo, you should use private forks and private CI (continuous integration). As a general guideline:
-
-* Do not push fixes under embargo to public branches or repositories until agreed with the disclosure coordinator;
-* Use a local CI copy. It can be either a setup running on the developer's machine, an in-premises copy, or a special private CI run spawned by the Eclipse Foundation IT team;
-* If the vulnerability is potentially severe and has a high risk of rapid exploitation, avoid creating tickets (even private ones) in development forges.
-
-The Project should review the potential severity of the issue and adjust measures as needed. If unsure, ask the disclosure coordinator or the EF Security team for guidance. In this case, you do not need to disclose details of the vulnerability that has a fix under development.
-
-At the moment the embargo is lifted, the Project should make public all previously-private issues and tickets related to the issue.
+Fixing in private is recommended, and strongly recommended for high and critical severity vulnerabilities. A fix on a public branch is a public disclosure the moment it is pushed, so push as close to the release as possible, with a neutral commit message. How to work in private on GitHub (the advisory's temporary private fork) and on GitLab is described in [Vulnerability Handling for Eclipse Committers and Project Leads](handling.md#developing-a-fix-under-embargo), section *Developing a fix under embargo*. When the embargo is lifted, make all previously private issues, branches and forks related to the issue public.
 
 ## The Traffic Light Protocol (TLP)
 
