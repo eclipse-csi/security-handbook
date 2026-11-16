@@ -134,8 +134,7 @@ The process consists of two steps:
 Before a workload can upload SBOMs, we need to register it with PIA and provision the corresponding entries in DependencyTrack. To request this, open a [HelpDesk](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues) issue with the following:
 
 - title: `[PROJECT NAME]: Request SBOM upload permission`
-- labels: `service:dependencytrack` and `team:security`
-- **project name**: the Eclipse project the SBOMs belong to, e.g. `technology.openvsx`
+- **project id**: the id of the Eclipse project the SBOMs belong to, e.g. `technology.openvsx`
 - **product name(s)**: the name of each product you want to upload SBOMs for, as it should appear in DependencyTrack, e.g. `openvsx-server` and `openvsx-webui`
 - **workload name(s)**: the CI/CD workload(s) that will perform the upload, i.e. the GitHub repository (e.g. `eclipse/openvsx`) or the Jenkins instance per project (e.g. `https://ci.eclipse.org/openvsx`)
 
