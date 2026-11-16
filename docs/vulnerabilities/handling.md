@@ -44,7 +44,45 @@ The detailed version can be found in [The process](#the-process) below.
 
 ## The process at a glance
 
-![The vulnerability handling process, from report to publication](images/vulnerability-handling-process.png)
+```{mermaid}
+flowchart TD
+    classDef start fill:#eeebe3,stroke:#8b8578,color:#000
+    classDef ef fill:#e6f0fb,stroke:#4a7ebb,color:#1d3f6e
+    classDef pst fill:#e3f3e8,stroke:#3f8f5c,color:#1f4d2e
+    classDef both fill:#ece6f8,stroke:#7a5cc4,color:#3b2a66
+
+    start["<b>Report arrives</b><br/>Reporter files a GitLab confidential issue<br/>or a GitHub private advisory"]:::start
+    ef1["<b>EF Security Team:</b><br/>• confirms receipt (1 working day)<br/>• assigns the project security team<br/>• sets a 2-working-day due date"]:::ef
+    d1{"Project security team responds<br/>within 2 working days?"}
+    ef2["<b>EF Security Team:</b><br/>• 30 days without activity: reminder<br/>• 1 week before the 3-month deadline: reminder<br/>• past the deadline: weekly review, escalation"]:::ef
+    p1["<b>Project security team</b> acknowledges the reporter"]:::pst
+    d2{"Project security team triages<br/>(report leaves vulnerability::unconfirmed)"}
+    p2["<b>Project security team</b> explains<br/>to the reporter why it is rejected"]:::pst
+    p3["<b>Project security team</b> explains to the<br/>reporter why it is a regular bug;<br/>may open a public bug in its own tracker"]:::pst
+    p4["<b>Project security team</b> files a<br/><b>CVE Reservation Request</b><br/>confidential, all required fields"]:::pst
+    ef3["<b>EF Security Team:</b><br/>• sets visibility::intentionally-public<br/>• removes confidentiality<br/>• closes the ticket"]:::ef
+    ef4["<b>EF Security Team</b> reserves the ID<br/>stays private, never used publicly yet"]:::ef
+    p5["<b>Project security team</b> develops the fix<br/>in private where possible (strongly recommended<br/>for high and critical severity); local build and tests;<br/>on GitHub, enters the ID in the draft advisory"]:::pst
+    p6["<b>Project security team</b> shares the fix and<br/>draft advisory with the reporter<br/>(review welcome, not required)"]:::pst
+    j1["<b>Project security team and EF Security Team</b><br/>agree the push and release timing"]:::both
+    p7["<b>Project security team</b> pushes the fix and releases<br/><b>THIS IS PUBLIC DISCLOSURE</b>"]:::pst
+    p8["<b>Project security team</b> files a<br/><b>CVE Publication Request</b> at release"]:::pst
+    ef5["<b>EF Security Team:</b><br/>• publishes the CVE record<br/>• closes the tickets<br/>• removes confidentiality"]:::ef
+    p9["<b>Project security team</b> publishes its advisory<br/>(and the GHSA, where used) and makes<br/>other private issues, branches and forks public"]:::pst
+    ef6["<b>EF Security Team</b> adds the record to<br/>the Known Vulnerabilities page"]:::ef
+
+    start --> ef1 --> d1
+    d1 -- no --> ef2
+    d1 -- yes --> p1
+    ef2 -.-> d1
+    p1 --> d2
+    d2 -- rejected --> p2
+    d2 -- regular bug --> p3
+    d2 -- confirmed --> p4
+    p2 --> ef3
+    p3 --> ef3
+    p4 --> ef4 --> p5 --> p6 --> j1 --> p7 --> p8 --> ef5 --> p9 --> ef6
+```
 
 ## Skip the queue
 
@@ -107,7 +145,7 @@ Each step is tagged with who acts; see [Who's involved](#whos-involved) above.
 
    Whether a confirmed vulnerability gets a CVE is a separate question; see [Does this need a CVE?](#does-this-need-a-cve)
 
-   **Duplicate reports.** If a report covers something already reported, say so in the ticket and link the original. The EF Security Team closes the duplicate as a duplicate and **keeps it confidential until the original is disclosed**, because making a duplicate public early would disclose the original vulnerability. One vulnerability gets one CVE, however many times it is reported.
+   **Duplicate reports.** If a report covers something already reported, say so in the ticket and link the original. The EF Security Team marks the report as a duplicate and gives the project security team time to confirm or invalidate that assessment. In every case, the reporter is told in the ticket that the issue is already being handled and that it must not be disclosed before the original is. Once confirmed, the EF Security Team closes the duplicate and **keeps it confidential until the original is disclosed**, because making a duplicate public early would disclose the original vulnerability. One vulnerability gets one CVE, however many times it is reported.
 
 7. **Project security team:** if the report is rejected or classified as a regular bug, tells the reporter why, in the ticket, rather than letting it lapse silently. In both cases the ticket stops being confidential.
 
