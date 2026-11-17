@@ -151,41 +151,9 @@ Add the [`upload-sbom`](https://github.com/eclipse-csi/workflows#upload-sbom) co
 
 ### GitLab CI
 
-The snippet below uploads an SBOM from a pipeline on the Eclipse GitLab instance (`gitlab.eclipse.org`), using a GitLab CI/CD [ID token](https://docs.gitlab.com/ci/secrets/id_token_authentication/) for authentication. The token is requested via the `id_tokens` keyword of the job, with audience `pia.eclipse.org`, so no secret needs to be configured.
+Extend the [`.pia`](https://gitlab.eclipse.org/eclipsefdn/it/releng/gitlab-runner-service/gitlab-ci-templates#upload-an-sbom-to-pia) job template from the [gitlab-ci-templates](https://gitlab.eclipse.org/eclipsefdn/it/releng/gitlab-runner-service/gitlab-ci-templates) repository in the pipeline that generates the SBOM. See its documentation for usage instructions and the full list of variables. Use the product name as registered in the request above.
 
-Update `PRODUCT_NAME`, `PRODUCT_VERSION` and `SBOM_PATH` to match your product, and use the product name as registered in the request above. Add the job to the same pipeline as the job that generates the SBOM, and make the SBOM available to it, e.g. as an artifact of that job via `needs`.
-
-```yaml
-upload-sbom:
-  image: alpine:3.22
-  id_tokens:
-    SBOM_ID_TOKEN:
-      aud: pia.eclipse.org
-  variables:
-    PRODUCT_NAME: '*** REPLACE ***'
-    PRODUCT_VERSION: '*** REPLACE ***'
-    SBOM_PATH: '*** REPLACE ***'
-    SBOM_API_DOMAIN: pia.eclipse.org
-  script:
-    - apk add --no-cache curl jq
-    - base64 -w0 "${SBOM_PATH}" > bom.b64
-    - |
-      jq -n \
-        --arg name "${PRODUCT_NAME}" \
-        --arg version "${PRODUCT_VERSION}" \
-        --rawfile bom bom.b64 \
-        '{
-          product_name: $name,
-          product_version: $version,
-          bom: $bom
-        }' | \
-      curl -sS --fail-with-body \
-        https://${SBOM_API_DOMAIN}/v1/upload/sbom \
-        -H "Authorization: Bearer ${SBOM_ID_TOKEN}" \
-        --json @-
-```
-
-> **Note**: Uploads are currently only accepted from pipelines triggered by a push, manually via "Run pipeline", by a pipeline schedule, or via the API. Uploads from merge request pipelines, from pipelines started with a pipeline trigger token, or from forks are rejected.
+> **Note**: PIA only accepts uploads from pipelines triggered by `push`, `web`, `schedule` or `api` events, e.g. not from merge request pipelines.
 
 ### Jenkins
 
