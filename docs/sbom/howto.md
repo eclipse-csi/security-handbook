@@ -127,7 +127,7 @@ We highly encourage all Eclipse Foundation projects to upload their SBOMs to thi
 The process consists of two steps:
 
 1. Request upload permission for your project (see [Prerequisite](#prerequisite-request-upload-permission) below).
-2. Implement the SBOM upload logic in your CI/CD pipeline (see [GitHub Actions](#github-actions) or [Jenkins](#jenkins) below).
+2. Implement the SBOM upload logic in your CI/CD pipeline (see [GitHub Actions](#github-actions), [GitLab CI](#gitlab-ci) or [Jenkins](#jenkins) below).
 
 ### Prerequisite: request upload permission
 
@@ -136,7 +136,7 @@ Before a workload can upload SBOMs, we need to register it with PIA and provisio
 - title: `[PROJECT NAME]: Request SBOM upload permission`
 - **project id**: the id of the Eclipse project the SBOMs belong to, e.g. `technology.openvsx`
 - **product name(s)**: the name of each product you want to upload SBOMs for, as it should appear in DependencyTrack, e.g. `openvsx-server` and `openvsx-webui`
-- **workload name(s)**: the CI/CD workload(s) that will perform the upload, i.e. the GitHub repository (e.g. `eclipse/openvsx`) or the Jenkins instance per project (e.g. `https://ci.eclipse.org/openvsx`)
+- **workload name(s)**: the CI/CD workload(s) that will perform the upload, i.e. the GitHub repository (e.g. `https://github.com/eclipse/openvsx`), the Eclipse GitLab project (e.g. `https://gitlab.eclipse.org/eclipse/openvsx/openvsx`) or the Jenkins instance per project (e.g. `https://ci.eclipse.org/openvsx`)
 
 We will get back to you once the permissions are in place.
 
@@ -147,6 +147,12 @@ We will get back to you once the permissions are in place.
 ### GitHub Actions
 
 Add the [`upload-sbom`](https://github.com/eclipse-csi/workflows#upload-sbom) composite action from the [eclipse-csi/workflows](https://github.com/eclipse-csi/workflows) repository to the job that generates the SBOM. See its documentation for usage instructions and the full list of inputs. Use the product name as registered in the request above.
+
+### GitLab CI
+
+Extend the [`.pia`](https://gitlab.eclipse.org/eclipsefdn/it/releng/gitlab-runner-service/gitlab-ci-templates#upload-an-sbom-to-pia) job template from the [gitlab-ci-templates](https://gitlab.eclipse.org/eclipsefdn/it/releng/gitlab-runner-service/gitlab-ci-templates) repository in the pipeline that generates the SBOM. See its documentation for usage instructions and the full list of variables. Use the product name as registered in the request above.
+
+> **Note**: PIA only accepts uploads from pipelines triggered by `push`, `web`, `schedule` or `api` events, e.g. not from merge request pipelines.
 
 ### Jenkins
 
